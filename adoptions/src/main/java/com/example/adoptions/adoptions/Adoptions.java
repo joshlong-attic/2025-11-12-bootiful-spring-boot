@@ -1,14 +1,11 @@
 package com.example.adoptions.adoptions;
 
 import org.jspecify.annotations.NonNull;
-import org.springframework.beans.factory.BeanRegistrar;
-import org.springframework.beans.factory.BeanRegistry;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.env.Environment;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.modulith.events.IncompleteEventPublications;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.function.Function;
 
 @Configuration
 @Import(AdoptionsBeanRegistrar.class)
@@ -29,22 +25,6 @@ class Adoptions {
 //    YouIncompleteMeRunner youIncompleteMeRunner(IncompleteEventPublications eventPublications) {
 //        return new YouIncompleteMeRunner(eventPublications);
 //    }
-}
-
-class AdoptionsBeanRegistrar implements BeanRegistrar {
-
-    @Override
-    public void register(@NonNull BeanRegistry registry, @NonNull Environment env) {
-
-//        registry.registerBean(YouIncompleteMeRunner.class);
-
-        registry.registerBean(YouIncompleteMeRunner.class, spec ->
-                spec.supplier(supplierContext -> {
-                    var iep = supplierContext.bean(IncompleteEventPublications.class);
-                    return new YouIncompleteMeRunner(iep);
-                })
-        );
-    }
 }
 
 

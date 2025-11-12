@@ -3,6 +3,7 @@ package com.example.adoptions;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jdbc.core.dialect.JdbcPostgresDialect;
 import org.springframework.data.relational.core.dialect.PostgresDialect;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
@@ -32,8 +33,8 @@ public class AdoptionsApplication {
     }
 
     @Bean
-    PostgresDialect jdbcPostgresDialect () {
-        return PostgresDialect.INSTANCE ;
+    JdbcPostgresDialect jdbcPostgresDialect () {
+        return JdbcPostgresDialect.INSTANCE ;
     }
 
     @Bean
